@@ -1,0 +1,12 @@
+.tbody {
+    display: contents;
+}
+
+.tbody tr {
+    display: contents;
+}
+
+.tbodyCell {
+    border: 1px solid #fff;
+    padding: 16px;
+}

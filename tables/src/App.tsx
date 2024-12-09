@@ -3,10 +3,10 @@ import './App.css'
 
 function App() {
     return (
-        <section>
+        <table>
             <Header/>
             <Body/>
-        </section>
+        </table>
     )
 }
 
