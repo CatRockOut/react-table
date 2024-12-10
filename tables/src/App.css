@@ -1,7 +1,35 @@
 table {
     display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    padding: 10px;
     border: 1px solid #fff;
     background-color: #0c126b;
     border-radius: 8px;
     margin-top: 50px;
+}
+
+thead,
+tbody {
+    display: contents;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+tr {
+    display: contents;
+}
+
+th, td {
+    background-color: #818bff;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #fff;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+td {
+    background-color: #1e2ec4;
 }
