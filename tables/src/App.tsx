@@ -8,7 +8,7 @@ type DataUser = {
 }
 
 function App() {
-    const [data, setData] = useState<DataUser[]>();
+    const [data, setData] = useState<DataUser[]>([]);
 
     useEffect(() => {
         const API = 'https://jsonplaceholder.typicode.com/users';
@@ -25,11 +25,18 @@ function App() {
         })();
     }, []);
 
+    const handleColumnSort = () => {
+        const newSortData = data.sort((a, b) => a.id - b.id);
+
+        console.log('newSortData: ', newSortData);
+        setData([...newSortData]);
+    };
+
     return (
         <table>
             <thead>
                 <tr>
-                    <th>ID</th>
+                    <th onClick={handleColumnSort}>ID</th>
                     <th>NAME</th>
                     <th>USERNAME</th>
                 </tr>

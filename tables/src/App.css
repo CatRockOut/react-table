@@ -13,6 +13,9 @@ thead,
 tbody {
     display: contents;
     border-radius: 8px;
+}
+
+thead {
     cursor: pointer;
 }
 
