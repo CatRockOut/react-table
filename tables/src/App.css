@@ -36,3 +36,20 @@ th, td {
 td {
     background-color: #1e2ec4;
 }
+
+img {
+    display: none;
+    width: 12px;
+    height: 12px;
+    margin-left: 4px;
+}
+
+.arrow-up {
+    display: inline-block;
+    transform: rotate(360deg);
+}
+
+.arrow-down {
+    display: inline-block;
+    transform: rotate(180deg);
+}
