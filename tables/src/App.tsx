@@ -39,38 +39,51 @@ function App() {
 
     const handleIdSort = () => {
         if (sortOrder.id === null) {
-            setSortOrder((prevState) => ({...prevState, id: 'arrowUpFlag'}));
-
             setData([...data].sort((a, b) => b.id - a.id));
+            setSortOrder((prevState) => ({...prevState, id: 'arrowUpFlag'}));
         } else if (sortOrder.id === 'arrowUpFlag') {
-            setSortOrder((prevState) => ({...prevState, id: 'arrowDownFlag'}));
-
             setData([...data].sort((a, b) => a.id - b.id));
+            setSortOrder((prevState) => ({...prevState, id: 'arrowDownFlag'}));
         } else {
-            setSortOrder((prevState) => ({...prevState, id: null}));
-
             setData([...data]);
+            setSortOrder((prevState) => ({...prevState, id: null}));
         }
     };
 
     const handleStringSort = (key: keyof DataUser) => {
         const sortedString = [...data].sort((a, b) => {
             if (typeof a[key] === 'string' && typeof b[key] === 'string') {
-                return a[key].localeCompare(b[key]);
+                const result = a[key].localeCompare(b[key]);
+
+                if (result > 0) {
+                    return 1;
+                } else if (result < 0) {
+                    return -1;
+                }
             }
 
-            return a[key] > b[key] ? 1 : -1;
+            return 0;
         });
+
+        console.log('sortedString:', sortedString);
+
+        if (sortOrder[key] === null) {
+            setSortOrder((prevState) => ({...prevState, [key]: 'arrowUpFlag'}));
+        } else if (sortOrder[key] === 'arrowUpFlag') {
+            setSortOrder((prevState) => ({...prevState, [key]: 'arrowDownFlag'}));
+        } else {
+            setSortOrder((prevState) => ({...prevState, [key]: null}));
+        }
 
         setData(sortedString);
     };
 
-    const getArrowClass = (order: null | 'arrowUpFlag' | 'arrowDownFlag') => {
-        if (order === 'arrowUpFlag') {
+    const getArrowClass = (key: keyof SortOrder) => {
+        if (sortOrder[key] === 'arrowUpFlag') {
             return 'arrow-up';
         }
 
-        if (order === 'arrowDownFlag') {
+        if (sortOrder[key] === 'arrowDownFlag') {
             return 'arrow-down';
         }
 
@@ -83,15 +96,27 @@ function App() {
             <tr>
                 <th onClick={handleIdSort}>
                     ID
-                    <img src={arrow} alt="arrow" className={getArrowClass(sortOrder.id)}/>
+                    <img
+                        src={arrow}
+                        alt="arrow"
+                        className={getArrowClass('id')}
+                    />
                 </th>
                 <th onClick={() => handleStringSort('name')}>
                     NAME
-                    <img src={arrow} alt="arrow" className={getArrowClass(sortOrder.name)}/>
+                    <img
+                        src={arrow}
+                        alt="arrow"
+                        className={getArrowClass('name')}
+                    />
                 </th>
                 <th onClick={() => handleStringSort('username')}>
                     USERNAME
-                    <img src={arrow} alt="arrow" className={getArrowClass(sortOrder.username)}/>
+                    <img
+                        src={arrow}
+                        alt="arrow"
+                        className={getArrowClass('username')}
+                    />
                 </th>
             </tr>
             </thead>
